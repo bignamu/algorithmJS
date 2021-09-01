@@ -14,10 +14,10 @@ function solution(number, k) {
     }
     if (k != 0){
         stack = stack.slice(0,-k)
-        console.log(...stack)
+        // console.log(...stack)
     }
 
-    console.log(...stack)
+    // console.log(...stack)
 
     answer = stack.join('')
     return answer;

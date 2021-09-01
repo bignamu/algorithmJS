@@ -13,12 +13,65 @@
     <button>입력</button>
 </body>
 <script>
-    const number = parseInt(prompt("몇 명이 참가하는가"));
-    
+    const number = parseInt(prompt("몇 명이 참가하는가"));    
+    const $input = document.querySelector('input');
+    const $button = document.querySelector('button');
+    const $word = document.querySelector('#word')
+    const $order = document.querySelector('#order');
+
+
     alert(number);
     const yesOrNo = confirm("맞나?");
-    document.querySelector('button');
-    console.log()
+    let word;
+    let newWord;
+    
+    
+
+    const onClickButton = ()=>{
+        if (!word){
+            word = newWord;
+            $word.textContent = word;
+            // $input.value = '';
+            let order = Number($order.textContent);
+            order += 1;
+            console.log(typeof(order))
+            console.log(order)
+            $order.textContent = order;
+            $input.focus()
+            
+        } else{
+            if (newWord[0] == word[word.length-1]){
+                word = newWord;
+                $word.textContent = word;
+                
+                let order = Number($order.textContent);
+                order += 1
+                if(order>number){
+                    order = 1
+                    
+                }
+                $order.textContent = order
+                $input.focus()
+                
+                
+                
+
+            } else {
+                alert('틀림')
+                $input.focus()
+            }
+            
+            
+        }
+        console.log('button 클릭')
+    }
+    const onInput = (e)=>{
+        newWord = e.target.value
+    }
+        
+    document.querySelector('input').addEventListener('input',onInput);
+    document.querySelector('button').addEventListener('click',onClickButton);
+
     
 </script>
 </html>
