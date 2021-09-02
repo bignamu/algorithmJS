@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <input readonly id="operator">
+    <input readonly type="number" id="result">
+    <div class="row">
+      <button id="num-7">7</button>
+      <button id="num-8">8</button>
+      <button id="num-9">9</button>
+      <button id="plus">+</button>
+    </div>
+    <div class="row">
+      <button id="num-4">4</button>
+      <button id="num-5">5</button>
+      <button id="num-6">6</button>
+      <button id="minus">-</button>
+    </div>
+    <div class="row">
+      <button id="num-1">1</button>
+      <button id="num-2">2</button>
+      <button id="num-3">3</button>
+      <button id="divide">/</button>
+    </div>
+    <div class="row">
+      <button id="clear">C</button>
+      <button id="num-0">0</button>
+      <button id="calculate">=</button>
+      <button id="multiply">x</button>
+    </div>
+
+    <script>
+        let allnum = document.querySelectorAll('button[id^=num]');
+        let allformul = document.querySelectorAll('button:not([id^="num"],[id="calculate"],[id="clear"])')
+        console.log(allformul)
+        let $num = document.querySelector('input#result');
+        let $oper = document.querySelector('input#operator')
+
+        let cur_num = 0;
+        let cur_formul = 0;
+        let stack = [];
+        let answer = [];
+
+        for (let an of allnum){
+            an.addEventListener('click',(e)=>{
+                cur_num = an.textContent;
+                stack.push(cur_num);
+                if (stack){
+                    $num.value = stack.join('')
+                } else{
+                    $num.value = answer.join('')
+                }
+                
+            });
+        };
+        
+        for (let formul of allformul){
+            formul.addEventListener('click',()=>{
+                cur_formul = formul.textContent;
+                if(!isNaN(stack[stack.length-1])) {
+    
+                    stack = stack.slice(0,stack.length)
+                    answer.push(Number(stack.join('')))
+                    answer.push(cur_formul)
+                    stack = [];
+                    console.log(answer)
+                    console.log(stack)
+                    $oper.value += cur_formul
+
+                } else {
+                    alert(`현재 마지막값 ${answer[answer.length-1]}`)
+                    
+                    
+                }
+            })
+        }
+        /*
+        let $cal = document.querySelector('button.#calculate]')
+        let $clear = document.querySelector('button.#clear]')
+        let answer = 1;
+        let cal_stk = [];
+        $cal.addEventListener('click',(e)=>{
+            while(stack){
+                
+                popped = stack.shift()
+                if (isNaN(popped)){
+                    answer += answer * popped
+                } 
+                
+            }
+        })*/
+        
+        
+        
+        
+        
+    </script>
+</body>
+</html>
