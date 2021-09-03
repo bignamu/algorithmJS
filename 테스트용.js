@@ -1,5 +1,5 @@
-let a = 5
-let b = 11
+let test = '9911';
 
-console.log(a%b)
 
+
+console.log('9' in test)

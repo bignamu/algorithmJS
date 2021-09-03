@@ -1,0 +1,76 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>숫자야구</title>
+</head>
+<body>
+<form id="form">
+  <input type="text" id="input">
+  <button>버튼</button>
+</form>
+<div id="logs">123</div>
+<script>
+  const $input = document.querySelector('#input');
+  const $form = document.querySelector('#form');
+  const $logs = document.querySelector('#logs');
+
+  let target = '';
+  for (let i=0;i<4;i++){
+    target += Math.floor(1+Math.random()*9)
+  }
+  const inputCheck = (num) =>{
+    if (num.length === 4){
+      return true;
+    } else{
+      return false
+    }
+  }
+  let ball = 0;
+  let strike = 0;
+
+  $form.addEventListener('submit',(e)=>{
+    e.preventDefault()
+    const val = e.target[0].value; // input은 value로 받는다
+    let target2 = target;
+    let val2 = val;
+    console.log(val)
+    if (inputCheck(val)){
+      for (let i = 0;i<4;i++){
+        if (val[i] == target[i]){
+          target2 = target2.replace(target[i],'')
+          val2 = val2.replace(target[i],'')
+          strike += 1;
+        }
+      }
+      if (target2.length>0){
+        for (let i of target2){
+          if (val2.includes(i))
+            ball += 1
+        }
+        
+      }
+      // $logs.textContent = `strike : ${strike} ball : ${ball} rand : ${target}`
+      $logs.append(`strike : ${strike} ball : ${ball} rand : ${target}`)
+    } else{
+      $logs.textContent = "4자리 수 아님"
+      e.target[0].value = ''
+    }
+
+    /*if (strike === 4){
+      $logs.textContent = `!!! homerun rand : ${target}`
+    }*/
+    
+    e.target[0].focus()
+    ball = 0;
+    strike = 0;
+
+  })
+  
+
+
+
+
+  
+</script>
+</body>
+</html>
