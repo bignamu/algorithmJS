@@ -8,6 +8,13 @@ function solution(n, costs) {
     let nodetable = Array.from({length:n+1},()=>Infinity);
     let ans_min = Infinity;
     nodetable[0] = 0
+
+    for (let edges of costs){
+        let start = edges[0]
+        let end = edges[1]
+        let edge = edges[2]
+        console.log(start,end,edge)
+    };
     console.log(visited);
     console.log(nodetable);
     
