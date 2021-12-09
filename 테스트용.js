@@ -1,5 +1,7 @@
-let test = '9911';
+let test = '2 2I I9 98 83 31 17 72 24 41 13 30 0';
 
 
 
-console.log('9' in test)
+test= test.replace(/(\s*)/g, "")
+
+console.log(test)
